@@ -1,3 +1,10 @@
+const {
+    orderBy,
+    filter,
+    keys,
+    pickBy,
+} = require("lodash");
+
 /**
  * FetchList
  * fetch a list with page, pageSize, sorted, filtered
@@ -11,7 +18,7 @@ function fetchList(list, {
     filtered
 }){
     let newList = list.slice(pageSize * page, pageSize * (page + 1));
-    newList = _.orderBy(
+    newList = orderBy(
         newList,
         sorted.map(({
             id
@@ -21,7 +28,7 @@ function fetchList(list, {
         }) => desc ? "desc" : "asc")
     );
 
-    newList = _.filter(newList, item => {
+    newList = filter(newList, item => {
         return filtered.reduce((res, filter) =>
             res && item[filter.id].toString().toLowerCase().indexOf(filter.value.toLowerCase()) === 0, true);
     });
@@ -79,7 +86,7 @@ function getActionsToUpdateArray (prevArray, newArray){
 
 
 
-const getAllIndex = (array, predicate) => _.keys(_.pickBy(array, predicate));
+const getAllIndex = (array, predicate) => keys(pickBy(array, predicate));
 
 /**
  * Update all matched item (with predicate) of array with your item, warning mutate array
