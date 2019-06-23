@@ -65,7 +65,7 @@ function getPathsKey(obj, keySearch) {
     return paths;
 }
 
-exports = {
+module.exports = {
     makeTree,
     difference,
     getPathsKey

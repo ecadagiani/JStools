@@ -1,6 +1,6 @@
 {
   "name": "ecadagiani-jstools",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "My JavaScript tools: functions, class, ...",
   "main": "index.js",
   "scripts": {
@@ -8,18 +8,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ecadagiani/JStools.git"
+    "url": "git+https://github.com/ecadagiani/jsTools.git"
   },
   "author": "Eden Cadagiani <e.cadagiani@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ecadagiani/JStools/issues"
+    "url": "https://github.com/ecadagiani/jsTools/issues"
   },
-  "homepage": "https://github.com/ecadagiani/JStools#readme",
+  "homepage": "https://github.com/ecadagiani/jsTools#readme",
   "dependencies": {
     "lodash": "^4.17.11"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.2",
     "eslint": "^6.0.0"
   }
 }

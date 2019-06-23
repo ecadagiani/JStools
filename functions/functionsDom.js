@@ -195,7 +195,7 @@ function getBestInputType(element, text = null) {
     return textWidth < innerWidth ? "input" : "textarea";
 }
 
-exports = {
+module.exports = {
     removeHtmlTag,
     replaceNBSbySpace,
     replaceSpaceByNBS,

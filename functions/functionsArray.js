@@ -127,7 +127,7 @@ function updateItemInArray (itemToReplace, array, predicate , condition = true){
     return array;
 }
 
-exports = {
+module.exports = {
     fetchList,
     getActionsToUpdateArray,
     updateOrPushItemInArray,

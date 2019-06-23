@@ -1,3 +1,3 @@
-exports = {
-    ...require("./functions")
+module.exports = {
+    ...require("./functions"),
 }
