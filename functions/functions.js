@@ -46,10 +46,10 @@ function getPathsKey(obj, keySearch) {
         let n = nodes.pop();
         Object.keys(n.obj).forEach(k => {
             let path = n.path.concat(k);
-            if (typeof n.obj[k] === 'object') {
+            if (typeof n.obj[k] === "object") {
 
                 if (k === keySearch) {
-                    paths.push(path.join('.'));
+                    paths.push(path.join("."));
                 }
                 nodes.unshift({
                     obj: n.obj[k],
@@ -86,10 +86,16 @@ function valuesInDeep(object, iterate = null){
     return res;
 }
 
+function wait(ms){
+    return new Promise((r, j)=>setTimeout(r, ms));
+}
+
+
 
 module.exports = {
     makeTree,
     difference,
     getPathsKey,
-    valuesInDeep
+    valuesInDeep,
+    wait
 };
