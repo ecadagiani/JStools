@@ -65,8 +65,31 @@ function getPathsKey(obj, keySearch) {
     return paths;
 }
 
+/**
+ * valuesInDeep
+ * Find all values in object, and return then in array
+ * @param {Object} object - Object to iterate
+ * @param {function=} iterate - A function to know if a value must or not be added to the array
+ * @return {array}
+ */
+function valuesInDeep(object, iterate = null){
+    if(typeof object !== "object") return;
+
+    let res = [];
+    Object.keys(object).forEach(key => {
+        if(typeof object[key] === "object")
+            res = res.concat( valuesInDeep(object[key], iterate) );
+
+        if((typeof iterate === "function" && iterate(object[key])) || !iterate)
+            res.push(object[key]);
+    });
+    return res;
+}
+
+
 module.exports = {
     makeTree,
     difference,
-    getPathsKey
+    getPathsKey,
+    valuesInDeep
 };
