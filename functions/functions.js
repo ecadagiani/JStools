@@ -80,7 +80,7 @@ function valuesInDeep(object, iterate = null){
         if(typeof object[key] === "object")
             res = res.concat( valuesInDeep(object[key], iterate) );
 
-        if((typeof iterate === "function" && iterate(object[key])) || !iterate)
+        if((typeof iterate === "function" && iterate(object[key], key)) || !iterate)
             res.push(object[key]);
     });
     return res;
