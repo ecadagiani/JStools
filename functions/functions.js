@@ -1,5 +1,6 @@
+const {URL} = require("url");
 const {
-    transform, isEqual, concat, isObject
+    transform, isEqual, concat, isObject, get
 } = require("lodash");
 
 
@@ -20,7 +21,6 @@ function makeTree(obj, key, acc = []){
     }
     return null;
 }
-
 
 
 function difference(object, base) {
@@ -65,6 +65,7 @@ function getPathsKey(obj, keySearch) {
     return paths;
 }
 
+
 /**
  * valuesInDeep
  * Find all values in object, and return then in array
@@ -86,10 +87,38 @@ function valuesInDeep(object, iterate = null){
     return res;
 }
 
+
 function wait(ms){
-    return new Promise((r, j)=>setTimeout(r, ms));
+    return new Promise(r=>setTimeout(r, ms));
 }
 
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+
+function getUrlParts(url) {
+    let parsedUrl;
+    try{
+        parsedUrl = new URL(url);
+    }catch(err) {
+        return null;
+    }
+
+    const domainResReg = (/[\w-]+\.(\w+|(co|com)\.\w+)$/gm).exec(parsedUrl.hostname);
+    const extensionRegRes = (/\.(\w+$)/gm).exec(parsedUrl.pathname);
+    const uriSchemeRegRes = (/[\w-]+/gm).exec(parsedUrl.protocol);
+
+    return {
+        uriScheme: get(uriSchemeRegRes, "[0]"),
+        extension: get(extensionRegRes, "[1]"),
+        domain: get(domainResReg, "[0]"),
+        pathname: parsedUrl.pathname,
+        hostname: parsedUrl.hostname,
+        port: parsedUrl.port,
+    };
+}
 
 
 module.exports = {
@@ -97,5 +126,7 @@ module.exports = {
     difference,
     getPathsKey,
     valuesInDeep,
-    wait
+    wait,
+    getRndInteger,
+    getUrlParts
 };
