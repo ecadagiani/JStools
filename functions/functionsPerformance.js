@@ -1,15 +1,32 @@
-const performance = window? window.performance || {} : {};
-performance.now = (function () {
-    return performance.now ||
-        performance.mozNow ||
-        performance.msNow ||
-        performance.oNow ||
-        performance.webkitNow ||
-        function () {
-            return Date.now();
-        };
-})();
-if(window) window.performance = performance;
+
+function getPerformance(){
+    try{
+        if(global.hasOwnProperty("window")){
+            const performance = window? window.performance || {} : {};
+            performance.now = (function () {
+                return performance.now ||
+                    performance.mozNow ||
+                    performance.msNow ||
+                    performance.oNow ||
+                    performance.webkitNow ||
+                    function () {
+                        return Date.now();
+                    };
+            })();
+            return performance;
+        }else{
+            const { performance } = require("perf_hooks");
+            return performance;
+        }
+    }catch(err){
+        return {now: () => Date.now()};
+    }
+}
+
+
+const performance = getPerformance();
+
+
 
 let timeBalancer = {};
 /**
@@ -67,6 +84,7 @@ function clearHandlerDelaying(id) {
 
 module.exports = {
     performance,
+    getPerformance,
     performanceBalancer,
     setHandlerDelaying,
     clearHandlerDelaying,

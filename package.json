@@ -1,6 +1,6 @@
 {
   "name": "@ecadagiani/jstools",
-  "version": "1.0.9",
+  "version": "1.1.2",
   "description": "My JavaScript tools: functions, class, ...",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/ecadagiani/jsTools#readme",
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "perf_hooks": "0.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
