@@ -121,6 +121,18 @@ function getUrlParts(url) {
 }
 
 
+function drawWithoutDuplicate(values, numberOfDraw) {
+    const res = [];
+    const arrayToDraw = Array.from(values);
+    for(let i = 0; i < numberOfDraw ; i++) {
+        const index = getRndInteger( 0, arrayToDraw.length - 1);
+        res[i] = arrayToDraw[index];
+        arrayToDraw.splice(index, 1);
+    }
+    return res;
+}
+
+
 module.exports = {
     makeTree,
     difference,
@@ -128,5 +140,6 @@ module.exports = {
     valuesInDeep,
     wait,
     getRndInteger,
-    getUrlParts
+    getUrlParts,
+    drawWithoutDuplicate
 };
