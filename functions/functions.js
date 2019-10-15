@@ -120,16 +120,75 @@ function getUrlParts(url) {
     };
 }
 
-
+/**
+ * return an array randomly completed with values.
+ * the result array have the length of numberOfDraw or values.length
+ * @param values
+ * @param numberOfDraw
+ * @return {[]}
+ */
 function drawWithoutDuplicate(values, numberOfDraw) {
     const res = [];
     const arrayToDraw = Array.from(values);
-    for(let i = 0; i < numberOfDraw ; i++) {
+    for(let i = 0; i < numberOfDraw && arrayToDraw.length > 0 ; i++) {
         const index = getRndInteger( 0, arrayToDraw.length - 1);
         res[i] = arrayToDraw[index];
         arrayToDraw.splice(index, 1);
     }
     return res;
+}
+
+/**
+ * Run updater on all key of object, who is not a object or an array
+ * @param object
+ * @param updater
+ * @return {Object}
+ */
+function updateValuesInDeep ( object, updater = null ) {
+    if( typeof object !== "object" ) return object;
+
+    let obj = {};
+    Object.keys( object ).forEach( key => {
+        if( Array.isArray( object[key])) {
+            obj[key] = [];
+            object[key].forEach(( item, index ) => {
+                obj[key].push( updateValuesInDeep( item, updater ));
+            });
+        }else if( typeof object[key] === "object" )
+            obj[key] = updateValuesInDeep( object[key], updater );
+        else if( typeof updater === "function" )
+            obj[key] = updater( object[key]);
+        else
+            obj[key] = object[key];
+    });
+    return obj;
+}
+
+/**
+ * order object key (with js sort function)
+ * @param obj
+ * @param sortFunction
+ * @return {Object}
+ */
+function sortObjectByKey ( obj, sortFunction = undefined ) {
+    const ordered = {};
+    Object.keys( obj )
+        .sort(sortFunction)
+        .forEach( key => {
+            ordered[key] = obj[key];
+        });
+    return ordered;
+}
+
+/**
+ * Get date with nbDays added
+ * @param nbDays
+ * @return {Date}
+ */
+export function getDateWithDay ( nbDays ) {
+    const date = new Date();
+    date.setDate( new Date().getDate() + nbDays );
+    return date;
 }
 
 
@@ -141,5 +200,8 @@ module.exports = {
     wait,
     getRndInteger,
     getUrlParts,
-    drawWithoutDuplicate
+    drawWithoutDuplicate,
+    updateValuesInDeep,
+    sortObjectByKey,
+    getDateWithDay,
 };
