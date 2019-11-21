@@ -119,6 +119,7 @@ module.exports = {
     performance,
     getPerformance,
     performanceBalancer,
+    preventFunctionOverload,
     clearFunctionPreventOverload,
     functionDelaying,
     clearFunctionDelaying,

@@ -1,6 +1,6 @@
 {
   "name": "@ecadagiani/jstools",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "My JavaScript tools: functions, class, ...",
   "main": "index.js",
   "scripts": {
